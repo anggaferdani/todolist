@@ -29,7 +29,7 @@
             <th>Filter :</th>
             <th><input type="text" name="search" id="search"></th>
         </thead>
-        <tbody>
+        <tbody id="todolistBody">
             <tr>
                 <td><input type="button" value="Done"></td>
                 <td>Todo Description</td>
@@ -39,7 +39,47 @@
 
     <script>
         // semua data yang di add akan masuk kedalam array variable ini
-        const todolist = [];
+        const todolist = [
+            "belajar javascript dasar",
+            "belajar javascript object oriented programming",
+            "belajar javascript document object model",
+        ];
+
+        // untuk menghapus semua element yang ada ditable
+        function clearTodolist(){
+            const todolistBody = document.getElementById("todolistBody");
+            while(todolistBody.firstChild){
+                todolistBody.removeChild(todolistBody.firstChild);
+            }
+        }
+
+        // untuk menampilkan data didalam array menggunakan perulangan  array
+        function displayTodolist(){
+            clearTodolist();
+
+            // setelah mengosongkan data akan melakukan iterasi data ke 0 sampai panjangnya(leghth)
+            for(let i = 0; i < todolist.length; i++){
+                const todo = todolist[i];
+
+                const tr = document.createElement("tr");
+                const tdButton = document.createElement("td");
+                tr.appendChild(tdButton);
+
+                // tombol
+                const buttonDone = document.createElement("input");
+                buttonDone.type = "button";
+                buttonDone.value = "Done";
+                tdButton.appendChild(buttonDone);
+
+                // text content
+                const tdTodo = document.createElement("td");
+                tdTodo.textContent = todo;
+                tr.appendChild(tdTodo);
+
+                const todolistBody = document.getElementById("todolistBody");
+                todolistBody.appendChild(tr);
+            }
+        }
 
         document.forms["todoForm"].onsubmit = function(event){
             event.preventDefault(); //agar tidak auto submit
@@ -51,7 +91,10 @@
             document.forms["todoForm"].reset();
 
             console.info(todolist);
+            displayTodolist();
         };
+
+        displayTodolist();
     </script>
 </body>
 </html>
