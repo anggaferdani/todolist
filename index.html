@@ -22,7 +22,7 @@
         </table>
     </form>
 
-    <h1>TodoList</h1>
+    <h1>todolist</h1>
 
     <table>
         <thead>
@@ -36,5 +36,22 @@
             </tr>
         </tbody>
     </table>
+
+    <script>
+        // semua data yang di add akan masuk kedalam array variable ini
+        const todolist = [];
+
+        document.forms["todoForm"].onsubmit = function(event){
+            event.preventDefault(); //agar tidak auto submit
+
+            const todo = document.forms["todoForm"]["todo"].value;
+            todolist.push(todo);
+
+            // untuk menghapus isi form
+            document.forms["todoForm"].reset();
+
+            console.info(todolist);
+        };
+    </script>
 </body>
 </html>
