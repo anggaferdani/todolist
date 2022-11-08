@@ -53,15 +53,8 @@
             }
         }
 
-        // untuk menampilkan data didalam array menggunakan perulangan  array
-        function displayTodolist(){
-            clearTodolist();
-
-            // setelah mengosongkan data akan melakukan iterasi data ke 0 sampai panjangnya(leghth)
-            for(let i = 0; i < todolist.length; i++){
-                const todo = todolist[i];
-
-                const tr = document.createElement("tr");
+        function addTodolist(todo){
+            const tr = document.createElement("tr");
                 const tdButton = document.createElement("td");
                 tr.appendChild(tdButton);
 
@@ -78,6 +71,23 @@
 
                 const todolistBody = document.getElementById("todolistBody");
                 todolistBody.appendChild(tr);
+        }
+
+        // untuk menampilkan data didalam array menggunakan perulangan  array
+        function displayTodolist(){
+            clearTodolist();
+
+            // setelah mengosongkan data akan melakukan iterasi data ke 0 sampai panjangnya(leghth)
+            for(let i = 0; i < todolist.length; i++){
+                const todo = todolist[i];
+
+                // mengambil value dari input search
+                const searchText = document.getElementById("search").value.toLowerCase();
+
+                // dicek apakah di todo ada kata text yang dicari kalau ada ditambilkan datanya
+                if(todo.toLowerCase().includes(searchText)){
+                    addTodolist(todo);
+                }
             }
         }
 
@@ -93,6 +103,14 @@
             console.info(todolist);
             displayTodolist();
         };
+
+        const serachInput = document.getElementById("search");
+        serachInput.onkeyup = function(){
+            displayTodolist();
+        }
+        serachInput.onkeydown = function(){
+            displayTodolist();
+        }
 
         displayTodolist();
     </script>
