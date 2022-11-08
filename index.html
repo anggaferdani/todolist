@@ -53,7 +53,12 @@
             }
         }
 
-        function addTodolist(todo){
+        function removeTodolist(index){
+            todolist.splice(index, 1);
+            displayTodolist();
+        }
+
+        function addTodolist(index, todo){
             const tr = document.createElement("tr");
                 const tdButton = document.createElement("td");
                 tr.appendChild(tdButton);
@@ -62,6 +67,9 @@
                 const buttonDone = document.createElement("input");
                 buttonDone.type = "button";
                 buttonDone.value = "Done";
+                buttonDone.onclick = function(){
+                    removeTodolist(index);
+                };
                 tdButton.appendChild(buttonDone);
 
                 // text content
@@ -86,7 +94,7 @@
 
                 // dicek apakah di todo ada kata text yang dicari kalau ada ditambilkan datanya
                 if(todo.toLowerCase().includes(searchText)){
-                    addTodolist(todo);
+                    addTodolist(i, todo);
                 }
             }
         }
